@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --watch --hmr --ssl=true --ssl-cert ~/localhost.pem --ssl-key ~/localhost-key.pem",
+    "start": "ng serve",
+    "start:https": "ng serve --watch --hmr --ssl=true --ssl-cert ~/localhost.pem --ssl-key ~/localhost-key.pem",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
