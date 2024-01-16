@@ -1,0 +1,32 @@
+<p-toast></p-toast>
+
+<p-table
+	[paginator]="true"
+	[rowsPerPageOptions]="[5, 10, 20, 100]"
+	[rows]="5"
+	[showCurrentPageReport]="true"
+	[tableStyle]="{ 'min-width': '50rem' }"
+	[value]="employees()"
+	currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="firstName" style="width: 25%">First Name<p-sortIcon field="firstName" /></th>
+			<th pSortableColumn="lastName" style="width: 25%">Last Name<p-sortIcon field="lastName" /></th>
+			<th pSortableColumn="email" style="width: 25%">Email<p-sortIcon field="email" /></th>
+			<th pSortableColumn="phone" style="width: 25%">Phone<p-sortIcon field="phone" /></th>
+			<th pSortableColumn="age" style="width: 25%">Age<p-sortIcon field="age" /></th>
+		</tr>
+	</ng-template>
+	<ng-template let-employee pTemplate="body">
+		<tr>
+			<td>{{ employee.firstName }}</td>
+			<td>{{ employee.lastName }}</td>
+			<td>{{ employee.email }}</td>
+			<td>{{ employee.phone }}</td>
+			<td>{{ employee.age }}</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="paginatorleft">
+		<p-button icon="pi pi-plus" styleClass="p-button-text" type="button"></p-button>
+	</ng-template>
+</p-table>
