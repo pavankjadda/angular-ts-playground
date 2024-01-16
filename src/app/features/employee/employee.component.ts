@@ -22,7 +22,7 @@ export class EmployeeComponent implements OnInit {
 
 			setTimeout(() => {
 				this.employees.set(employees.slice(0, 4));
-				this.genericStoreService.setData(employees.slice(0, 4));
+				this.genericStoreService.updateMulti(employees.slice(0, 4));
 			}, 2000);
 		});
 	}

@@ -25,7 +25,7 @@ export class BookComponent implements OnInit {
 
 			setTimeout(() => {
 				this.books.set(books.slice(0, 4));
-				this.genericStoreService.setData(books.slice(0, 4));
+				this.genericStoreService.updateMulti(books.slice(0, 4));
 				this.message.set('Removed one book');
 			}, 2000);
 		});
