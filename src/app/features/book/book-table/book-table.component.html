@@ -1,0 +1,30 @@
+<p-toast></p-toast>
+
+<p-table
+	[paginator]="true"
+	[rowsPerPageOptions]="[5, 10, 20, 100]"
+	[rows]="5"
+	[showCurrentPageReport]="true"
+	[tableStyle]="{ 'min-width': '50rem' }"
+	[value]="books()"
+	currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+	<ng-template pTemplate="header">
+		<tr>
+			<th pSortableColumn="id" style="width: 25%">First Name<p-sortIcon field="id" /></th>
+			<th pSortableColumn="title" style="width: 25%">Last Name<p-sortIcon field="title" /></th>
+			<th pSortableColumn="isbn" style="width: 25%">Email<p-sortIcon field="isbn" /></th>
+			<th pSortableColumn="auhtor" style="width: 25%">Phone<p-sortIcon field="auhtor" /></th>
+		</tr>
+	</ng-template>
+	<ng-template let-book pTemplate="body">
+		<tr>
+			<td>{{ book.id }}</td>
+			<td>{{ book.title }}</td>
+			<td>{{ book.isbn }}</td>
+			<td>{{ book.author }}</td>
+		</tr>
+	</ng-template>
+	<ng-template pTemplate="paginatorleft">
+		<p-button icon="pi pi-plus" styleClass="p-button-text" type="button"></p-button>
+	</ng-template>
+</p-table>
