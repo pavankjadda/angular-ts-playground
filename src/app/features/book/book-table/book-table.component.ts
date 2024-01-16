@@ -20,9 +20,9 @@ export class BookTableComponent {
 
 	constructor() {
 		effect(() => {
-			this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Loaded books from server' });
+			this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: 'Loaded books from server' });
 			setTimeout(() => {
-				this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Removed one book' });
+				this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Success', detail: 'Removed one book' });
 			}, 2000);
 		});
 	}

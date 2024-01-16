@@ -18,9 +18,9 @@ export class EmployeeTableComponent {
 
 	constructor() {
 		effect(() => {
-			this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Loaded employees from server' });
+			this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: 'Loaded employees from server' });
 			setTimeout(() => {
-				this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Removed one employee' });
+				this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Success', detail: 'Removed one employee' });
 			}, 2000);
 		});
 	}
