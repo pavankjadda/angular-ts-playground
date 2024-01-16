@@ -19,11 +19,6 @@ export class EmployeeComponent implements OnInit {
 		this.employeeService.getEmployees().subscribe((employees) => {
 			this.employees.set(employees);
 			this.genericStoreService.setData(employees);
-
-			setTimeout(() => {
-				this.employees.set(employees.slice(0, 4));
-				this.genericStoreService.updateMulti(employees.slice(0, 4));
-			}, 2000);
 		});
 	}
 }

@@ -26,4 +26,14 @@ export class BookTableComponent {
 			}, 2000);
 		});
 	}
+
+	updateBook() {
+		this.genericStoreService.updateData({
+			id: 1,
+			title: 'TS Essentials',
+			isbn: '8488-4888-4888-222-4',
+			author: 'PJ',
+		} as Book);
+		this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: 'Updated Book with ID: 1' });
+	}
 }

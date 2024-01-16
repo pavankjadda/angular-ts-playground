@@ -11,19 +11,30 @@ export class GenericStoreService<T extends IdType> {
 		this.data.set(data);
 	}
 
+	/**
+	 * Update an item in the store. If the item does not exist in new list, add it. Otherwise, update it.
+	 *
+	 * @param data The item to added or updated
+	 *
+	 * @author Pavan Kumar Jadda
+	 * @since 1.0.0
+	 */
 	updateData(data: T) {
 		this.data.update((currentData) => {
-			const dataMap = new Map(currentData.map((item) => [item['id'], item]));
-			dataMap.set(data['id'], data);
+			const dataMap = new Map(currentData.map((item) => [item.id, item]));
+			dataMap.set(data.id, data);
 			return Array.from(dataMap.values());
 		});
 	}
 
+	/**
+	 * Update multiple items in the store. If the item does not exist in new list, delete it. Otherwise, update it.
+	 * @param data The new list of items
+	 *
+	 * @author Pavan Kumar Jadda
+	 * @since 1.0.0
+	 */
 	updateMulti(data: T[]) {
-		const dataMap = new Map(data.map((item) => [item['id'], item]));
-
-		this.data.update((currentData) => {
-			return currentData.map((item) => dataMap.get(item['id']) || item);
-		});
+		this.data.set(data);
 	}
 }

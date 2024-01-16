@@ -10,10 +10,10 @@
 	currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 	<ng-template pTemplate="header">
 		<tr>
-			<th pSortableColumn="id" style="width: 25%">First Name<p-sortIcon field="id" /></th>
-			<th pSortableColumn="title" style="width: 25%">Last Name<p-sortIcon field="title" /></th>
-			<th pSortableColumn="isbn" style="width: 25%">Email<p-sortIcon field="isbn" /></th>
-			<th pSortableColumn="auhtor" style="width: 25%">Phone<p-sortIcon field="auhtor" /></th>
+			<th pSortableColumn="id" style="width: 25%">ID<p-sortIcon field="id" /></th>
+			<th pSortableColumn="title" style="width: 25%">Title<p-sortIcon field="title" /></th>
+			<th pSortableColumn="isbn" style="width: 25%">ISBN<p-sortIcon field="isbn" /></th>
+			<th pSortableColumn="auhtor" style="width: 25%">Author<p-sortIcon field="author" /></th>
 		</tr>
 	</ng-template>
 	<ng-template let-book pTemplate="body">
@@ -28,3 +28,9 @@
 		<p-button icon="pi pi-plus" styleClass="p-button-text" type="button"></p-button>
 	</ng-template>
 </p-table>
+
+<br />
+
+<div class="align-center">
+	<button (click)="updateBook()" label="Update Book" pButton type="button"></button>
+</div>

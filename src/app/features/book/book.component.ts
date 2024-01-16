@@ -13,7 +13,6 @@ import { BookTableComponent } from './book-table/book-table.component';
 })
 export class BookComponent implements OnInit {
 	books = signal<Book[]>([]);
-	message = signal('');
 	bookService = inject(BookService);
 	genericStoreService: GenericStoreService<Book> = inject(GenericStoreService);
 
@@ -21,13 +20,6 @@ export class BookComponent implements OnInit {
 		this.bookService.getBooks().subscribe((books) => {
 			this.books.set(books);
 			this.genericStoreService.setData(books);
-			this.message.set('Loaded books from server');
-
-			setTimeout(() => {
-				this.books.set(books.slice(0, 4));
-				this.genericStoreService.updateMulti(books.slice(0, 4));
-				this.message.set('Removed one book');
-			}, 2000);
 		});
 	}
 }
