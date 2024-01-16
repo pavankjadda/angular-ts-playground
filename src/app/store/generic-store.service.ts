@@ -1,14 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { computed, Injectable, signal } from '@angular/core';
 import { IdType } from '../types/id-type';
 
 @Injectable({
 	providedIn: 'root',
 })
 export class GenericStoreService<T extends IdType> {
-	data = signal<T[]>([]);
+	_data = signal<T[]>([]);
+	data = computed(() => this._data());
 
 	setData(data: T[]) {
-		this.data.set(data);
+		this._data.set(data);
 	}
 
 	/**
@@ -20,7 +21,7 @@ export class GenericStoreService<T extends IdType> {
 	 * @since 1.0.0
 	 */
 	updateData(data: T) {
-		this.data.update((currentData) => {
+		this._data.update((currentData) => {
 			const dataMap = new Map(currentData.map((item) => [item.id, item]));
 			dataMap.set(data.id, data);
 			return Array.from(dataMap.values());
@@ -35,6 +36,6 @@ export class GenericStoreService<T extends IdType> {
 	 * @since 1.0.0
 	 */
 	updateMulti(data: T[]) {
-		this.data.set(data);
+		this._data.set(data);
 	}
 }
