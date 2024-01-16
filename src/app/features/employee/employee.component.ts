@@ -12,21 +12,17 @@ import { GenericStoreService } from '../../store/generic-store.service';
 })
 export class EmployeeComponent implements OnInit {
 	employees = signal<Employee[]>([]);
-	message = signal('');
 	employeeService = inject(EmployeeService);
 	genericStoreService: GenericStoreService<Employee> = inject(GenericStoreService);
-	employees2 = this.genericStoreService.data;
 
 	ngOnInit(): void {
 		this.employeeService.getEmployees().subscribe((employees) => {
 			this.employees.set(employees);
 			this.genericStoreService.setData(employees);
-			this.message.set('Loaded employees from server');
 
 			setTimeout(() => {
 				this.employees.set(employees.slice(0, 4));
 				this.genericStoreService.setData(employees.slice(0, 4));
-				this.message.set('Removed one employee');
 			}, 2000);
 		});
 	}

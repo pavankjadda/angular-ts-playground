@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { Book } from '../../types/book';
 import { BookService } from '../../services/book.service';
 import { GenericStoreService } from '../../store/generic-store.service';
@@ -11,12 +11,11 @@ import { BookTableComponent } from './book-table/book-table.component';
 	templateUrl: './book.component.html',
 	styles: ``,
 })
-export class BookComponent {
+export class BookComponent implements OnInit {
 	books = signal<Book[]>([]);
 	message = signal('');
 	bookService = inject(BookService);
 	genericStoreService: GenericStoreService<Book> = inject(GenericStoreService);
-	books2 = this.genericStoreService.data;
 
 	ngOnInit(): void {
 		this.bookService.getBooks().subscribe((books) => {

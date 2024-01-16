@@ -1,9 +1,9 @@
-import { Component, effect, inject, input } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
-import { Employee } from '../../../types/employee';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { GenericStoreService } from '../../../store/generic-store.service';
 
 @Component({
 	selector: 'app-employee-table',
@@ -13,13 +13,15 @@ import { MessageService } from 'primeng/api';
 	templateUrl: './employee-table.component.html',
 })
 export class EmployeeTableComponent {
-	employees = input<Employee[]>([]);
-	message = input<string>();
+	employees = inject(GenericStoreService).data;
 	messageService = inject(MessageService);
 
 	constructor() {
 		effect(() => {
-			if (this.message()) this.messageService.add({ severity: 'success', summary: 'Success', detail: this.message() });
+			this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Loaded employees from server' });
+			setTimeout(() => {
+				this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Removed one employee' });
+			}, 2000);
 		});
 	}
 }
