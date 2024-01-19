@@ -1,11 +1,11 @@
-import { Component, effect, inject, Signal } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { EntityStore } from '../../../store/entity-store';
+import { EntityStore } from '../../../store/core/entity-store';
 import { Employee } from '../../../types/employee';
-import { Store } from '../../../store/store';
+import { Store } from '../../../store/core/store';
 import { ProgressState } from '../../../types/progress-state';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -18,7 +18,8 @@ import { ProgressBarModule } from 'primeng/progressbar';
 })
 export class EmployeeTableComponent {
 	employeeEntityStore: EntityStore<Employee> = inject(EntityStore);
-	loadingState: Signal<ProgressState> = inject(Store).data;
+	progressStore: Store<ProgressState> = inject(Store);
+	loadingState = this.progressStore.data;
 	employees = this.employeeEntityStore.data;
 	messageService = inject(MessageService);
 

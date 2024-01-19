@@ -8,6 +8,21 @@
 			<a class="button is-primary" routerLink="/employees" style="margin: 1rem">Employee</a>
 		</ul>
 	</div>
+	<br />
+
+	<div class="align-center">
+		<p>Project Id: {{ projectStore.data()?.id }}</p>
+	</div>
+
+	<div class="align-center">
+		<br />
+		<p>Project JSON: {{ JSON.stringify(projectStore.data()) }}</p>
+	</div>
+
+	<div class="align-center">
+		<br />
+		<p>Progress JSON: {{ JSON.stringify(progressStore.data()) }}</p>
+	</div>
 </main>
 
 <router-outlet></router-outlet>

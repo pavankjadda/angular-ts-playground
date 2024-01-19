@@ -1,5 +1,5 @@
 import { computed, Injectable, signal } from '@angular/core';
-import { IdType } from '../types/id-type';
+import { IdType } from '../../types/id-type';
 
 @Injectable({
 	providedIn: 'root',

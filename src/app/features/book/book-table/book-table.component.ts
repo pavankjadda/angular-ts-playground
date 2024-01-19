@@ -4,7 +4,7 @@ import { MessageService, SharedModule } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { Book } from '../../../types/book';
-import { EntityStore } from '../../../store/entity-store';
+import { EntityStore } from '../../../store/core/entity-store';
 
 @Component({
 	selector: 'app-book-table',

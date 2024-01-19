@@ -1,6 +1,6 @@
 <p-toast key="bc" position="bottom-center"></p-toast>
 
-@if (loadingState().isLoading) {
+@if (loadingState()?.isLoading) {
 	<p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
 }
 

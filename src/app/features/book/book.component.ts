@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Book } from '../../types/book';
 import { BookService } from '../../services/book.service';
-import { EntityStore } from '../../store/entity-store';
+import { EntityStore } from '../../store/core/entity-store';
 import { BookTableComponent } from './book-table/book-table.component';
 
 @Component({
