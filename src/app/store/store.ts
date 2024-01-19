@@ -3,7 +3,7 @@ import { computed, Injectable, signal } from '@angular/core';
 @Injectable({
 	providedIn: 'root',
 })
-export class GenericStoreService<T> {
+export class Store<T> {
 	_data = signal<T | undefined>(undefined);
 	data = computed(() => this._data());
 

@@ -3,9 +3,9 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { GenericEntityStoreService } from '../../../store/generic-entity-store.service';
+import { EntityStore } from '../../../store/entity-store';
 import { Employee } from '../../../types/employee';
-import { GenericStoreService } from '../../../store/generic-store.service';
+import { Store } from '../../../store/store';
 import { ProgressState } from '../../../types/progress-state';
 import { ProgressBarModule } from 'primeng/progressbar';
 
@@ -17,23 +17,23 @@ import { ProgressBarModule } from 'primeng/progressbar';
 	templateUrl: './employee-table.component.html',
 })
 export class EmployeeTableComponent {
-	genericEntityStoreService: GenericEntityStoreService<Employee> = inject(GenericEntityStoreService);
-	loadingState: Signal<ProgressState> = inject(GenericStoreService).data;
-	employees = this.genericEntityStoreService.data;
+	employeeEntityStore: EntityStore<Employee> = inject(EntityStore);
+	loadingState: Signal<ProgressState> = inject(Store).data;
+	employees = this.employeeEntityStore.data;
 	messageService = inject(MessageService);
 
 	constructor() {
 		effect(() => {
 			this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: 'Loaded employees from server' });
 			setTimeout(() => {
-				this.genericEntityStoreService.setData(this.employees().slice(0, 4));
+				this.employeeEntityStore.setData(this.employees().slice(0, 4));
 				this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Success', detail: 'Removed one employee' });
 			}, 2000);
 		});
 	}
 
 	updateEmployee() {
-		this.genericEntityStoreService.updateData({
+		this.employeeEntityStore.updateData({
 			id: 1001,
 			firstName: 'Pavan Kumar',
 			lastName: 'Jadda',

@@ -4,7 +4,7 @@ import { IdType } from '../types/id-type';
 @Injectable({
 	providedIn: 'root',
 })
-export class GenericEntityStoreService<T extends IdType> {
+export class EntityStore<T extends IdType> {
 	_data = signal<T[]>([]);
 	data = computed(() => this._data());
 
