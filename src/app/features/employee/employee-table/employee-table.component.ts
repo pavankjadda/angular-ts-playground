@@ -1,35 +1,39 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, Signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { GenericStoreService } from '../../../store/generic-store.service';
+import { GenericEntityStoreService } from '../../../store/generic-entity-store.service';
 import { Employee } from '../../../types/employee';
+import { GenericStoreService } from '../../../store/generic-store.service';
+import { ProgressState } from '../../../types/progress-state';
+import { ProgressBarModule } from 'primeng/progressbar';
 
 @Component({
 	selector: 'app-employee-table',
 	standalone: true,
-	imports: [ButtonModule, TableModule, ToastModule],
+	imports: [ButtonModule, TableModule, ToastModule, ProgressBarModule],
 	providers: [MessageService],
 	templateUrl: './employee-table.component.html',
 })
 export class EmployeeTableComponent {
-	genericStoreService = inject(GenericStoreService);
-	employees = this.genericStoreService.data;
+	genericEntityStoreService: GenericEntityStoreService<Employee> = inject(GenericEntityStoreService);
+	loadingState: Signal<ProgressState> = inject(GenericStoreService).data;
+	employees = this.genericEntityStoreService.data;
 	messageService = inject(MessageService);
 
 	constructor() {
 		effect(() => {
 			this.messageService.add({ key: 'bc', severity: 'success', summary: 'Success', detail: 'Loaded employees from server' });
 			setTimeout(() => {
-				this.genericStoreService.updateMulti(this.employees().slice(0, 4));
+				this.genericEntityStoreService.setData(this.employees().slice(0, 4));
 				this.messageService.add({ key: 'bc', severity: 'warn', summary: 'Success', detail: 'Removed one employee' });
 			}, 2000);
 		});
 	}
 
 	updateEmployee() {
-		this.genericStoreService.updateData({
+		this.genericEntityStoreService.updateData({
 			id: 1001,
 			firstName: 'Pavan Kumar',
 			lastName: 'Jadda',

@@ -1,7 +1,7 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { Book } from '../../types/book';
 import { BookService } from '../../services/book.service';
-import { GenericStoreService } from '../../store/generic-store.service';
+import { GenericEntityStoreService } from '../../store/generic-entity-store.service';
 import { BookTableComponent } from './book-table/book-table.component';
 
 @Component({
@@ -14,12 +14,12 @@ import { BookTableComponent } from './book-table/book-table.component';
 export class BookComponent implements OnInit {
 	books = signal<Book[]>([]);
 	bookService = inject(BookService);
-	genericStoreService: GenericStoreService<Book> = inject(GenericStoreService);
+	genericEntityStoreService: GenericEntityStoreService<Book> = inject(GenericEntityStoreService);
 
 	ngOnInit(): void {
 		this.bookService.getBooks().subscribe((books) => {
 			this.books.set(books);
-			this.genericStoreService.setData(books);
+			this.genericEntityStoreService.setData(books);
 		});
 	}
 }

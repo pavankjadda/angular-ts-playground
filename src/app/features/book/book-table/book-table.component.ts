@@ -4,7 +4,7 @@ import { MessageService, SharedModule } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { Book } from '../../../types/book';
-import { GenericStoreService } from '../../../store/generic-store.service';
+import { GenericEntityStoreService } from '../../../store/generic-entity-store.service';
 
 @Component({
 	selector: 'app-book-table',
@@ -14,7 +14,7 @@ import { GenericStoreService } from '../../../store/generic-store.service';
 	providers: [MessageService],
 })
 export class BookTableComponent {
-	genericStoreService: GenericStoreService<Book> = inject(GenericStoreService);
+	genericStoreService: GenericEntityStoreService<Book> = inject(GenericEntityStoreService);
 	books = this.genericStoreService.data;
 	messageService = inject(MessageService);
 

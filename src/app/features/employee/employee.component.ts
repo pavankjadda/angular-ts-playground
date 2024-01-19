@@ -1,8 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
 import { Employee } from '../../types/employee';
 import { EmployeeTableComponent } from './employee-table/employee-table.component';
+import { GenericEntityStoreService } from '../../store/generic-entity-store.service';
 import { GenericStoreService } from '../../store/generic-store.service';
+import { ProgressState } from '../../types/progress-state';
 
 @Component({
 	selector: 'app-employee',
@@ -11,14 +13,28 @@ import { GenericStoreService } from '../../store/generic-store.service';
 	templateUrl: './employee.component.html',
 })
 export class EmployeeComponent implements OnInit {
-	employees = signal<Employee[]>([]);
 	employeeService = inject(EmployeeService);
-	genericStoreService: GenericStoreService<Employee> = inject(GenericStoreService);
+	entityStoreService: GenericEntityStoreService<Employee> = inject(GenericEntityStoreService);
+	progressService: GenericStoreService<ProgressState> = inject(GenericStoreService);
 
 	ngOnInit(): void {
+		this.progressService.update({
+			isLoading: true,
+			isSuccess: false,
+			isError: false,
+			message: 'Loading employees...',
+		});
+
 		this.employeeService.getEmployees().subscribe((employees) => {
-			this.employees.set(employees);
-			this.genericStoreService.setData(employees);
+			setTimeout(() => {
+				this.progressService.update({
+					isLoading: false,
+					isSuccess: true,
+					isError: false,
+					message: 'Employees loaded.',
+				});
+				this.entityStoreService.setData(employees);
+			}, 2000);
 		});
 	}
 }

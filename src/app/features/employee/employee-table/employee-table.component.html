@@ -1,5 +1,9 @@
 <p-toast key="bc" position="bottom-center"></p-toast>
 
+@if (loadingState().isLoading) {
+	<p-progressBar mode="indeterminate" [style]="{ height: '6px' }"></p-progressBar>
+}
+
 <p-table
 	[paginator]="true"
 	[rowsPerPageOptions]="[5, 10, 20, 100]"
