@@ -3,11 +3,11 @@ import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { EntityStore } from '../../../store/core/entity-store';
 import { Employee } from '../../../types/employee';
 import { Store } from '../../../store/core/store';
 import { ProgressState } from '../../../types/progress-state';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { EmployeeStore } from '../../../store/employee.store';
 
 @Component({
 	selector: 'app-employee-table',
@@ -17,7 +17,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 	templateUrl: './employee-table.component.html',
 })
 export class EmployeeTableComponent {
-	employeeEntityStore: EntityStore<Employee> = inject(EntityStore);
+	employeeEntityStore = inject(EmployeeStore);
 	progressStore: Store<ProgressState> = inject(Store);
 	loadingState = this.progressStore.data;
 	employees = this.employeeEntityStore.data;

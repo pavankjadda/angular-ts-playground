@@ -8,6 +8,10 @@ export class EntityStore<T extends IdType> {
 	_data = signal<T[]>([]);
 	data = computed(() => this._data());
 
+	findById(id: number) {
+		return this._data().find((item) => item.id === id);
+	}
+
 	setData(data: T[]) {
 		this._data.set(data);
 	}
