@@ -25,15 +25,13 @@ export class EmployeeComponent implements OnInit {
 		} as ProgressState);
 
 		this.employeeService.getEmployees().subscribe((employees) => {
-			setTimeout(() => {
-				this.progressStore.update({
-					isLoading: false,
-					isSuccess: true,
-					isError: false,
-					message: 'Employees loaded.',
-				} as ProgressState);
-				this.employeeStore.setData(employees);
-			}, 2000);
+			this.progressStore.update({
+				isLoading: false,
+				isSuccess: true,
+				isError: false,
+				message: 'Employees loaded.',
+			} as ProgressState);
+			this.employeeStore.setData(employees);
 		});
 	}
 }

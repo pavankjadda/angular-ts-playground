@@ -1,4 +1,4 @@
-<p-toast key="bc" position="bottom-center"></p-toast>
+<p-toast key="br" position="bottom-right"></p-toast>
 
 <p-table
 	[paginator]="true"
@@ -6,7 +6,7 @@
 	[rows]="5"
 	[showCurrentPageReport]="true"
 	[tableStyle]="{ 'min-width': '50rem' }"
-	[value]="books()"
+	[value]="bookStore.data()"
 	currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
 	<ng-template pTemplate="header">
 		<tr>

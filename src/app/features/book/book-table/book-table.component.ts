@@ -4,7 +4,7 @@ import { MessageService, SharedModule } from 'primeng/api';
 import { TableModule } from 'primeng/table';
 import { ToastModule } from 'primeng/toast';
 import { Book } from '../../../types/book';
-import { EntityStore } from '../../../store/core/entity-store';
+import { BookStore } from '../../../store/book.store';
 
 @Component({
 	selector: 'app-book-table',
@@ -14,8 +14,7 @@ import { EntityStore } from '../../../store/core/entity-store';
 	providers: [MessageService],
 })
 export class BookTableComponent {
-	bookEntityStore: EntityStore<Book> = inject(EntityStore);
-	books = this.bookEntityStore.data;
+	bookStore = inject(BookStore);
 	messageService = inject(MessageService);
 
 	constructor() {
@@ -28,7 +27,7 @@ export class BookTableComponent {
 	}
 
 	updateBook() {
-		this.bookEntityStore.updateData({
+		this.bookStore.updateData({
 			id: 1,
 			title: 'TS Essentials',
 			isbn: '8488-4888-4888-222-4',
